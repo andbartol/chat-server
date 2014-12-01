@@ -1,7 +1,13 @@
 /*
 !configure.ac
 !Makefile.am
-!/src/
-/src/Makefile.in
-!/tests/
-/tests/Makefile.in
+
+/src/*
+!/src/*.c
+!/src/*.h
+!/src/Makefile.am
+
+/tests/*
+!/tests/*.c
+!/tests/*.h
+!/tests/Makefile.am

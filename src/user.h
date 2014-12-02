@@ -12,9 +12,23 @@
 
 #define	NAME_MAX_LEN 20
 
+enum colors
+{
+	CLR_BLACK,
+	CLR_RED,
+	CLR_GREEN,
+	CLR_YELLOW,
+	CLR_BLUE,
+	CLR_MAGENTA,
+	CLR_CYAN,
+	CLR_WHITE
+};
+
+
 struct user_s {
 	char name[NAME_MAX_LEN];
 	char sha1[SHA_DIGEST_LENGTH+1];
+	enum colors color;
 };
 
 #endif /* end of include guard: USER_H */

@@ -1,6 +1,7 @@
 /* vim: set ts=8 sw=8 tw=0 noet : */
 #include "../src/auth.h"
 #include "../src/user.h"
+#include "../src/color.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <check.h>
@@ -42,14 +43,49 @@ Suite * auth_suite(void)
 	return s;
 }
 
+START_TEST(test_colors)
+{
+	printfclr(CLR_RED, "red\n");
+}
+END_TEST
+
+START_TEST(test_colors_variable)
+{
+	printfclr(CLR_RED, "red %d\n", 1);
+}
+END_TEST
+
+START_TEST(test_colors_user)
+{
+	printfusr((struct user_s*)auths->data, "colored\n");
+}
+END_TEST
+
+Suite * print_suite(void)
+{
+	Suite *s;
+	TCase *tc_core;
+
+	s = suite_create("Colors");
+
+	tc_core = tcase_create("Core");
+
+	tcase_add_test(tc_core, test_colors);
+	tcase_add_test(tc_core, test_colors_variable);
+	tcase_add_test(tc_core, test_colors_user);
+	suite_add_tcase(s, tc_core);
+
+	return s;
+}
+
 int main()
 {
 	int number_failed;
 	Suite *s;
 	SRunner *sr;
 
-	s = auth_suite();
-	sr = srunner_create(s);
+	sr = srunner_create(auth_suite());
+	srunner_add_suite(sr, print_suite());
 
 	srunner_run_all(sr, CK_NORMAL);
 	number_failed = srunner_ntests_failed(sr);

@@ -3,7 +3,6 @@
 
 #define USER_H
 
-#include "auth.h"
 #include <glib.h>
 #include <openssl/sha.h>
 #include <string.h>

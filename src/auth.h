@@ -13,11 +13,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct auth_s {
-	char name[NAME_MAX_LEN];
-	char sha1[SHA_DIGEST_LENGTH+1];
-};
-
 int readusers(const char*, GSList**);
 int autenticate_user(struct user_s*, GSList*);
 

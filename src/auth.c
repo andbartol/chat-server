@@ -13,12 +13,12 @@
 gint authcompare(gconstpointer, gconstpointer);
 
 /*
- * \fn readusers
+ * ! \fn readusers
  * \brief Reads the file with usernames
  * The file is like this:
  * USER SHA1
  * \param path path to the file
- * \param auth output linked list (auth_s)
+ * \param auth output linked list (user_s)
  * \return 0 if couldn't read file, 1 otherwise
  */
 int readusers(const char* path, GSList** auth) {
@@ -33,7 +33,7 @@ int readusers(const char* path, GSList** auth) {
 
 	while (!feof(f)) {
 		if (fgets(buffer, MAX_LINE_LEN, f)) {
-			struct auth_s* a = (struct auth_s*) malloc(sizeof (struct auth_s));
+			struct user_s* a = (struct user_s*) malloc(sizeof (struct user_s));
 			if (!a) {
 				perror("malloc");
 				continue;
@@ -49,12 +49,12 @@ int readusers(const char* path, GSList** auth) {
 }
 
 /*
- * Checks if the auth_s is compatible with the user
+ * Checks if the user_s is compatible with the user
  */
 gint authcompare(gconstpointer auth, gconstpointer user) {
-	if (strcmp(((struct auth_s*)auth)->name, ((struct user_s*)user)->name))
+	if (strcmp(((struct user_s*)auth)->name, ((struct user_s*)user)->name))
 		return 1;
-	if (strcmp(((struct auth_s*)auth)->sha1, ((struct user_s*)user)->sha1))
+	if (strcmp(((struct user_s*)auth)->sha1, ((struct user_s*)user)->sha1))
 		return 1;
 	return 0;
 }
@@ -62,7 +62,7 @@ gint authcompare(gconstpointer auth, gconstpointer user) {
 /*
  * Checks if the user is present in the linked list
  * ut: User to authenticate
- * auth: Linked list of auth_s
+ * auth: Linked list of user_s
  * returns 0 if authentication failed, 1 otherwise
  */
 int autenticate_user(struct user_s* ut, GSList* auth) {

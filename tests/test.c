@@ -6,23 +6,26 @@
 #include <stdlib.h>
 #include <check.h>
 
+GSList *auths;
+
+void setup();
+void teardown();
+
 START_TEST(test_auth_work)
 {
-	GSList *auths = NULL, *it = NULL;
-
-	ck_assert_msg(readusers("users.txt", &auths) == 1, "Couldn't read file");
+	GSList *it = NULL;
 
 	struct user_s u;
 	strcpy(u.name, "andrea");
 	strcpy(u.sha1, "12345678901234567890");
 
-	/*ck_assert_msg(autenticate_user(&u, auths) != 0, "auth didn't worked");*/
-	autenticate_user(&u, auths);
+	ck_assert_msg(autenticate_user(&u, auths) != 0, "auth didn't worked");
+	/*autenticate_user(&u, auths);*/
 
 	strcpy(u.sha1, "10345678901234567890");
 
-	/*ck_assert_msg(autenticate_user(&u, auths) == 0, "auth worked");*/
-	autenticate_user(&u, auths);
+	ck_assert_msg(autenticate_user(&u, auths) == 0, "auth worked");
+	/*autenticate_user(&u, auths);*/
 
 	g_slist_free(auths);
 }
@@ -37,6 +40,7 @@ Suite * auth_suite(void)
 
 	tc_core = tcase_create("Core");
 
+	tcase_add_checked_fixture(tc_core, setup, teardown);
 	tcase_add_test(tc_core, test_auth_work);
 	suite_add_tcase(s, tc_core);
 
@@ -61,6 +65,17 @@ START_TEST(test_colors_user)
 }
 END_TEST
 
+void setup()
+{
+	auths = NULL;
+	readusers("users.txt", &auths);
+}
+
+void teardown()
+{
+	g_slist_free(auths);
+}
+
 Suite * print_suite(void)
 {
 	Suite *s;
@@ -70,6 +85,7 @@ Suite * print_suite(void)
 
 	tc_core = tcase_create("Core");
 
+	tcase_add_checked_fixture(tc_core, setup, teardown);
 	tcase_add_test(tc_core, test_colors);
 	tcase_add_test(tc_core, test_colors_variable);
 	tcase_add_test(tc_core, test_colors_user);

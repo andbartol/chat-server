@@ -28,3 +28,9 @@ Makefile
 /libtool
 /src/.deps/
 /tests/.deps/
+/src/.libs/
+/tests/.libs/
+/tests/test
+/tests/test-suite.log
+/tests/test.log
+/tests/test.trs

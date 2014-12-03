@@ -9,3 +9,14 @@ Makefile.in
 /install-sh
 /missing
 /stamp-h1
+
+/ar-lib
+/autom4te.cache
+/autoscan.log
+/config.guess
+/config.h.in
+/config.sub
+/configure.scan
+/ltmain.sh
+/m4
+/test-driver

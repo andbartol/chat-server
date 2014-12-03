@@ -1,0 +1,17 @@
+/Makefile
+/config.h
+/config.log
+/config.status
+/libtool
+/src/.deps
+/src/Makefile
+/stamp-h1
+/tests/.deps
+/tests/Makefile
+
+/src/.libs
+/tests/.libs
+/tests/test
+/tests/test-suite.log
+/tests/test.log
+/tests/test.trs

@@ -1,13 +1,6 @@
-/*
+*
+!*/
+
+!.gitignore
 !configure.ac
 !Makefile.am
-
-/src/*
-!/src/*.c
-!/src/*.h
-!/src/Makefile.am
-
-/tests/*
-!/tests/*.c
-!/tests/*.h
-!/tests/Makefile.am

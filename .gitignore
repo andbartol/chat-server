@@ -21,3 +21,10 @@ Makefile
 /ltmain.sh
 /m4
 /test-driver
+
+/config.h
+/config.log
+/config.status
+/libtool
+/src/.deps/
+/tests/.deps/

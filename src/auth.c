@@ -16,7 +16,7 @@ gint authcompare(gconstpointer, gconstpointer);
  * ! \fn readusers
  * \brief Reads the file with usernames
  * The file is like this:
- * USER SHA1
+ * USER SHA1 NUMCOLOR
  * \param path path to the file
  * \param auth output linked list (user_s)
  * \return 0 if couldn't read file, 1 otherwise
@@ -33,12 +33,12 @@ int readusers(const char* path, GSList** auth) {
 
 	while (!feof(f)) {
 		if (fgets(buffer, MAX_LINE_LEN, f)) {
-			struct user_s* a = (struct user_s*) malloc(sizeof (struct user_s));
+			struct user_s* a = (struct user_s*) malloc(sizeof(struct user_s));
 			if (!a) {
 				perror("malloc");
 				continue;
 			}
-			sscanf(buffer, "%s %s", a->name, a->sha1);
+			sscanf(buffer, "%s %s %d\n", a->name, a->sha1, &a->color);
 			*auth = g_slist_append(*auth, a);
 		}
 	}

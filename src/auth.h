@@ -6,6 +6,7 @@
 
 #define AUTH_H
 
+#include "log_file.h"
 #include "user.h"
 #include <glib.h>
 #include <openssl/sha.h>

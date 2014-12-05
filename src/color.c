@@ -28,6 +28,17 @@ int vprintfclr(enum colors color, char * fstring, va_list arg)
 }
 
 /*
+ * Function to print with color without va_list
+ */
+int printfclr(enum colors color, char * fstring, ...)
+{
+	va_list vl;
+	va_start(vl, fstring);
+	vprintfclr(color, fstring, vl);
+	va_end(vl);
+}
+
+/*
  * Function to print with user's color
  * user: user to print with
  * fstring: string formatted as in printf
@@ -35,6 +46,11 @@ int vprintfclr(enum colors color, char * fstring, va_list arg)
  */
 int printfusr(struct user_s * user, char * fstring, ...)
 {
+	va_list vl;
+	va_start(vl, fstring);
 
+	int ret = vprintfclr(user->color, fstring, vl);
 
+	va_end(vl);
+	return ret;
 }

@@ -5,13 +5,10 @@
  * Function to print with colors
  * color: color to print with
  * fstring: string formatted as in printf
- * ...: args like printf
+ * va_list: args like printf
  */
-int printfclr(enum colors color, char * fstring, ...)
+int vprintfclr(enum colors color, char * fstring, va_list arg)
 {
-	va_list vl;
-	va_start(vl, fstring);
-
 	char csi[] = "\x1b[";
 	int final_color = color+30;
 	//				csi	color m   fstring
@@ -25,9 +22,8 @@ int printfclr(enum colors color, char * fstring, ...)
 	strcat(final_str, "m");
 	strcat(final_str, fstring);
 	int ret;
-	ret = vprintf(final_str, vl);
+	ret = vprintf(final_str, arg);
 
-	va_end(vl);
 	return ret;
 }
 
@@ -39,11 +35,6 @@ int printfclr(enum colors color, char * fstring, ...)
  */
 int printfusr(struct user_s * user, char * fstring, ...)
 {
-	/*va_list vl;*/
-	/*va_start(vl, fstring);*/
 
-	/*vprintf(final_str, vl);*/
 
-	/*va_end(vl);*/
-	return 0;
 }
